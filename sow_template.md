@@ -1,6 +1,6 @@
 # CS 457 Project Statement of Work (SOW) & Protocol Specification Template
 
-**Student Name:** Adnan Alturkestani
+**Student Name:** Adnan Alturkestani  
 **Date:** 2026-09-16  
 **Course:** CS 457 - Computer Networks  
 **Target Server Domain:** `server.alturkestani.edu`  
