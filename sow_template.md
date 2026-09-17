@@ -1,7 +1,7 @@
 # CS 457 Project Statement of Work (SOW) & Protocol Specification Template
 
 **Student Name:** Adnan Alturkestani
-**Date:** 20026-09-16  
+**Date:** 2026-09-16  
 **Course:** CS 457 - Computer Networks  
 **Target Server Domain:** `server.alturkestani.edu`  
 
@@ -22,9 +22,9 @@
 - **Game Summary:** A two-player turn-based Battleship game played in the console. Each player places ships on a grid and takes turns choosing coordinates to attack the opponent’s board. The server reports whether each attack is a hit or miss and keeps track of both players’ remaining ships. The game ends when one player sinks all of the opponent’s ships.
 
 ### 1.2 Core Game Rules & Win/Draw Conditions
-- **Turn Mechanics:** Player 1 goes first, then players alternate turns. On each turn, the active player chooses one coordinate to attack. The server only accepts moves from the player whose turn it is and switches turns after each valid attack.
+- **Turn Mechanics:** The first player to connect to the server is assigned Player 1 and the second is assigned Player 2. Player 1 goes first, then players alternate turns. Each turn, the active player chooses one coordinate to attack. The server only accepts moves from the player whose turn it is and switches turns after each valid attack.
 - **Victory Condition:** A player wins when they have successfully hit and sunk all of the opponent’s ships.
-- **Draw/Tie Condition:** Battleship cannot end in a draw because players take turns until one sinks all of the oppnent's ships. 
+- **Draw/Tie Condition:** Battleship cannot end in a draw because players take turns until one sinks all of the opponent's ships. 
 
 ---
 
