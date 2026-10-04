@@ -15,34 +15,33 @@ stateDiagram-v2
     direction TB
 
     [*] --> INIT
-    INIT --> WAITING_FOR_PLAYERS: Server starts
+    INIT --> WAITING_FOR_PLAYERS: Start server
 
-    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: First CONNECT / assign Player_1
-    WAITING_FOR_PLAYERS --> GAME_START: Second CONNECT / assign Player_2
+    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: CONNECT #1 / LOBBY_WAIT
+    WAITING_FOR_PLAYERS --> ACTIVE_GAME: CONNECT #2
 
-    GAME_START --> SHIP_PLACEMENT: Send GAME_START
+    state ACTIVE_GAME {
+        [*] --> GAME_START
 
-    SHIP_PLACEMENT --> SHIP_PLACEMENT: Invalid PLACE_SHIP / ERROR
-    SHIP_PLACEMENT --> SHIP_PLACEMENT: Valid placement / fleet incomplete
-    SHIP_PLACEMENT --> PLAYER_TURN: Both fleets ready / Player_1 starts
+        GAME_START --> SHIP_PLACEMENT: Send GAME_START
 
-    PLAYER_TURN --> PLAYER_TURN: Invalid MOVE / ERROR
-    PLAYER_TURN --> EVALUATE_MOVE: Valid MOVE
+        SHIP_PLACEMENT --> SHIP_PLACEMENT: Invalid PLACE_SHIP / ERROR
+        SHIP_PLACEMENT --> SHIP_PLACEMENT: Valid PLACE_SHIP / STATE_UPDATE
+        SHIP_PLACEMENT --> PLAYER_TURN: Fleets ready / STATE_UPDATE
 
-    EVALUATE_MOVE --> PLAYER_TURN: No winner / switch turn
-    EVALUATE_MOVE --> GAME_OVER: All ships sunk
+        PLAYER_TURN --> PLAYER_TURN: Invalid MOVE / ERROR
+        PLAYER_TURN --> EVALUATE_MOVE: Valid MOVE
 
-    GAME_OVER --> CLEANUP: Send final result
+        EVALUATE_MOVE --> PLAYER_TURN: MOVE_RESULT / next turn
+        EVALUATE_MOVE --> GAME_OVER: MOVE_RESULT + GAME_OVER
+    }
+
+    ACTIVE_GAME --> GAME_OVER: DISCONNECT / GAME_OVER (FORFEIT)
+
+    GAME_OVER --> CLEANUP: Final result sent
     CLEANUP --> WAITING_FOR_PLAYERS: Reset game
 
     WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: Disconnect / remove client
-
-    GAME_START --> DISCONNECT_HANDLER: Disconnect detected
-    SHIP_PLACEMENT --> DISCONNECT_HANDLER: Disconnect detected
-    PLAYER_TURN --> DISCONNECT_HANDLER: Disconnect detected
-    EVALUATE_MOVE --> DISCONNECT_HANDLER: Disconnect detected
-
-    DISCONNECT_HANDLER --> GAME_OVER: Opponent wins by FORFEIT
 ```
 
 ---
