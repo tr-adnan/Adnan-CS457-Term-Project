@@ -12,13 +12,13 @@ Player 1 is the first player to connect and takes the first turn after both play
 
 ```mermaid
 stateDiagram-v2
+stateDiagram-v2
     direction TB
 
     [*] --> INIT
     INIT --> WAITING_FOR_PLAYERS: Start server
 
     WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: CONNECT #1 / LOBBY_WAIT
-    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: Disconnect
     WAITING_FOR_PLAYERS --> ACTIVE_GAME: CONNECT #2
 
     note left of WAITING_FOR_PLAYERS
@@ -32,20 +32,21 @@ stateDiagram-v2
         [*] --> GAME_START
         GAME_START --> SHIP_PLACEMENT: GAME_START
 
-        SHIP_PLACEMENT --> SHIP_PLACEMENT: Valid PLACE_SHIP
-        SHIP_PLACEMENT --> SHIP_PLACEMENT: Invalid / ERROR
+        SHIP_PLACEMENT --> SHIP_PLACEMENT: PLACE_SHIP
         SHIP_PLACEMENT --> PLAYER_TURN: Fleets ready / STATE_UPDATE
 
         note left of SHIP_PLACEMENT
             Valid placement:
             save ship and stay here
-            until both fleets are complete
+
+            Invalid placement:
+            send ERROR and stay here
         end note
 
         PLAYER_TURN --> PLAYER_TURN: Invalid MOVE / ERROR
         PLAYER_TURN --> EVALUATE_MOVE: Valid MOVE
 
-        note left of PLAYER_TURN
+        note right of PLAYER_TURN
             Invalid includes:
             out-of-turn, repeated attack,
             bad coordinates, or bad fields
