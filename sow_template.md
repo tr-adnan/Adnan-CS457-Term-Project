@@ -32,19 +32,23 @@
 
 ### 2.1 Message Transport & Serialization Format
 - **Transport Protocol:** TCP
-- **Serialization Format:** [JSON / Fixed-Header Binary / Delimited Text]
-- **Framing Mechanism:** [e.g., Newline-delimited (`\n`) JSON payloads OR 4-byte big-endian length prefix]
+- **Serialization Format:** JSON encoded with UTF-8
+- **Framing Mechanism:** Newline-delimited (`\n`) JSON payloads
 
 ### 2.2 Message Schema Definitions
 
 #### Message Types:
 1. `CONNECT` (Client -> Server): Request to join the game room.
 2. `LOBBY_WAIT` (Server -> Client): Notification that server is waiting for Player 2.
-3. `GAME_START` (Server -> Clients): Game initiated, assigns roles (e.g. Player X vs Player O).
-4. `MOVE` (Client -> Server): Player action (e.g., cell coordinates or answer choice).
-5. `STATE_UPDATE` (Server -> Clients): Broadcast current game board / state and active player turn.
-6. `GAME_OVER` (Server -> Clients): Victory / Draw notification with final scores.
-7. `ERROR` (Server -> Client): Invalid move or malformed packet error.
+3. `GAME_START` (Server -> Clients): Tells both players that the game is starting and begins ship placement.
+4. `PLACE_SHIP` (Client -> Server): Places one of the player's ships using a starting row, starting column, and orientation.
+5. `STATE_UPDATE` (Server -> Clients): Sends updated board information, remaining ships, game phase, and active player.
+6. `MOVE` (Client -> Server): Sends the row and column that the active player wants to attack.
+7. `MOVE_RESULT` (Server -> Clients): Reports whether an attack was a HIT, MISS, or SUNK.
+8. `ERROR` (Server -> Client): Reports invalid input, invalid ship placement, malformed messages, repeated attacks, or out-of-turn moves.
+9. `DISCONNECT` (Client <-> Server): Represents an intentional application-level disconnect.
+10. `GAME_OVER` (Server -> Clients): Announces the winner and whether the game ended because all ships were sunk or because of a forfeit.
+
 
 #### Example JSON Protocol Schema:
 ```json
@@ -52,17 +56,48 @@
   "msg_type": "MOVE",
   "player_id": "Player_1",
   "payload": {
-    "row": 0,
-    "col": 2
+    "row": 2,
+    "col": 4
   },
-  "timestamp": 1727000000
+  "timestamp": 1791070040
 }
 ```
 
 ---
 
 ### 2.3 Game State Machine (FSM) Design (Sprint 1 Deliverable)
-- **State Transitions:** Detail state flow: `INIT` -> `WAITING_FOR_PLAYERS` -> `PLAYER_TURN` -> `EVALUATE_MOVE` -> `CHECK_WIN_DRAW` -> `GAME_OVER` -> `CLEANUP`.
+- **State Transitions:**
+```mermaid
+stateDiagram-v2
+    [*] --> INIT
+
+    INIT --> WAITING_FOR_PLAYERS: Server starts and begins listening
+
+    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: First CONNECT / assign Player_1 and send LOBBY_WAIT
+    WAITING_FOR_PLAYERS --> GAME_START: Second CONNECT / assign Player_2
+
+    GAME_START --> SHIP_PLACEMENT: Send GAME_START to both players
+
+    SHIP_PLACEMENT --> SHIP_PLACEMENT: Valid PLACE_SHIP, fleet incomplete / save placement and send STATE_UPDATE
+    SHIP_PLACEMENT --> SHIP_PLACEMENT: Invalid PLACE_SHIP / send ERROR
+    SHIP_PLACEMENT --> PLAYER_TURN: Both players placed all ships / set Player_1 active and send STATE_UPDATE
+
+    PLAYER_TURN --> PLAYER_TURN: Invalid or out-of-turn MOVE / send ERROR
+    PLAYER_TURN --> EVALUATE_MOVE: Valid MOVE
+
+    EVALUATE_MOVE --> PLAYER_TURN: No winner / send MOVE_RESULT and STATE_UPDATE, switch active player
+    EVALUATE_MOVE --> GAME_OVER: All opponent ships sunk / send MOVE_RESULT and GAME_OVER
+
+    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: Client disconnect, EOF, or socket error / remove client
+
+    GAME_START --> GAME_OVER: DISCONNECT, EOF, or socket error / opponent wins by FORFEIT
+    SHIP_PLACEMENT --> GAME_OVER: DISCONNECT, EOF, or socket error / opponent wins by FORFEIT
+    PLAYER_TURN --> GAME_OVER: DISCONNECT, EOF, or socket error / opponent wins by FORFEIT
+    EVALUATE_MOVE --> GAME_OVER: DISCONNECT, EOF, or socket error / opponent wins by FORFEIT
+
+    GAME_OVER --> CLEANUP: Final result sent
+    CLEANUP --> WAITING_FOR_PLAYERS: Close sockets and reset game state
+```
 
 ---
 
