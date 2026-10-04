@@ -18,35 +18,48 @@ stateDiagram-v2
     INIT --> WAITING_FOR_PLAYERS: Start server
 
     WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: CONNECT #1 / LOBBY_WAIT
+    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: Disconnect
     WAITING_FOR_PLAYERS --> ACTIVE_GAME: CONNECT #2
+
+    note left of WAITING_FOR_PLAYERS
+        Disconnect before game:
+        remove client and keep waiting
+    end note
 
     state ACTIVE_GAME {
         direction TB
 
         [*] --> GAME_START
-
         GAME_START --> SHIP_PLACEMENT: GAME_START
 
-        SHIP_PLACEMENT --> SHIP_PLACEMENT: PLACE_SHIP / STATE_UPDATE
+        SHIP_PLACEMENT --> SHIP_PLACEMENT: Valid PLACE_SHIP
         SHIP_PLACEMENT --> SHIP_PLACEMENT: Invalid / ERROR
         SHIP_PLACEMENT --> PLAYER_TURN: Fleets ready / STATE_UPDATE
 
+        note left of SHIP_PLACEMENT
+            Valid placement:
+            save ship and stay here
+            until both fleets are complete
+        end note
+
         PLAYER_TURN --> PLAYER_TURN: Invalid MOVE / ERROR
-        PLAYER_TURN --> EVALUATE_MOVE: MOVE
+        PLAYER_TURN --> EVALUATE_MOVE: Valid MOVE
+
+        note left of PLAYER_TURN
+            Invalid includes:
+            out-of-turn, repeated attack,
+            bad coordinates, or bad fields
+        end note
 
         EVALUATE_MOVE --> PLAYER_TURN: MOVE_RESULT / next turn
         EVALUATE_MOVE --> [*]: MOVE_RESULT / winner
     }
 
     ACTIVE_GAME --> GAME_OVER: GAME_OVER
-    ACTIVE_GAME --> FORFEIT: DISCONNECT
-
-    FORFEIT --> GAME_OVER: GAME_OVER / FORFEIT
+    ACTIVE_GAME --> GAME_OVER: DISCONNECT / FORFEIT
 
     GAME_OVER --> CLEANUP: Final result
     CLEANUP --> WAITING_FOR_PLAYERS: Reset game
-
-    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: Disconnect / remove client
 ```
 
 ---
