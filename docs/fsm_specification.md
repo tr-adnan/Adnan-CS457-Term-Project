@@ -15,15 +15,10 @@ stateDiagram-v2
     direction TB
 
     [*] --> INIT
-    INIT --> WAITING_FOR_PLAYERS: Start server
+    INIT --> WAITING_FOR_PLAYERS: Start
 
-    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: CONNECT #1 / LOBBY_WAIT
-    WAITING_FOR_PLAYERS --> ACTIVE_GAME: CONNECT #2
-
-    note left of WAITING_FOR_PLAYERS
-        Disconnect before game:
-        remove client and keep waiting
-    end note
+    WAITING_FOR_PLAYERS --> WAITING_FOR_PLAYERS: CONNECT / LOBBY_WAIT
+    WAITING_FOR_PLAYERS --> ACTIVE_GAME: CONNECT
 
     state ACTIVE_GAME {
         direction TB
@@ -32,34 +27,19 @@ stateDiagram-v2
         GAME_START --> SHIP_PLACEMENT: GAME_START
 
         SHIP_PLACEMENT --> SHIP_PLACEMENT: PLACE_SHIP
-        SHIP_PLACEMENT --> PLAYER_TURN: Fleets ready / STATE_UPDATE
+        SHIP_PLACEMENT --> PLAYER_TURN: STATE_UPDATE
 
-        note left of SHIP_PLACEMENT
-            Valid placement:
-            save ship and stay here
+        PLAYER_TURN --> PLAYER_TURN: ERROR
+        PLAYER_TURN --> EVALUATE_MOVE: MOVE
 
-            Invalid placement:
-            send ERROR and stay here
-        end note
-
-        PLAYER_TURN --> PLAYER_TURN: Invalid MOVE / ERROR
-        PLAYER_TURN --> EVALUATE_MOVE: Valid MOVE
-
-        note right of PLAYER_TURN
-            Invalid includes:
-            out-of-turn, repeated attack,
-            bad coordinates, or bad fields
-        end note
-
-        EVALUATE_MOVE --> PLAYER_TURN: MOVE_RESULT / next turn
-        EVALUATE_MOVE --> [*]: MOVE_RESULT / winner
+        EVALUATE_MOVE --> PLAYER_TURN: MOVE_RESULT
+        EVALUATE_MOVE --> [*]: Winner
     }
 
-    ACTIVE_GAME --> GAME_OVER: GAME_OVER
-    ACTIVE_GAME --> GAME_OVER: DISCONNECT / FORFEIT
+    ACTIVE_GAME --> GAME_OVER: GAME_OVER / DISCONNECT
 
     GAME_OVER --> CLEANUP: Final result
-    CLEANUP --> WAITING_FOR_PLAYERS: Reset game
+    CLEANUP --> WAITING_FOR_PLAYERS: Reset
 ```
 
 ---
