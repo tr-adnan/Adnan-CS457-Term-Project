@@ -12,7 +12,6 @@ Player 1 is the first player to connect and takes the first turn after both play
 
 ```mermaid
 stateDiagram-v2
-stateDiagram-v2
     direction TB
 
     [*] --> INIT
