@@ -104,12 +104,12 @@ stateDiagram-v2
 ## 3. Game Behavior & Server Concurrency Architecture (Sprint 2 Deliverable)
 
 ### 3.1 Server Concurrency Strategy
-- **Architecture Choice:** [Multi-Threading (`threading.Thread`) OR Non-blocking I/O multiplexing (`select.select` / `selectors`)]
-- **Synchronization Logic:** Explain how shared game state and client list are thread-safe (e.g. `threading.Lock`) to prevent race conditions during turn processing.
+- **Architecture Choice:** Multi-Threading (`threading.Thread`)
+- **Synchronization Logic:** The server uses `threading.Lock` to protect shared game state, including boards, turns, scores, and connected clients. Only one thread can update this information at a time, preventing race conditions.
 
 ### 3.2 State & Score Synchronization Across Clients
-- **Turn Enforcement:** Detail how the server validates active player ID before processing moves and broadcasts updated turn notifications to all clients.
-- **Score & Board Synchronization:** Describe how state broadcasts keep client screens synchronized in real time.
+- **Turn Enforcement:** The server checks the player's registered connection against the active player before accepting a move. Invalid or out-of-turn moves receive an `ERROR` without changing the turn. After each valid move, both clients receive a `STATE_UPDATE` showing whose turn is next.
+- **Score & Board Synchronization:** The server sends personalized `STATE_UPDATE` messages after valid ship placements and moves. Each player sees their own board, known opponent hits and misses, and remaining ships. Scores are based on the number of enemy ships sunk (`4 - remaining_opponent_ships`). Updates are queued in order to keep both clients synchronized without revealing hidden ships.
 
 ---
 
