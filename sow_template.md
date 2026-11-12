@@ -116,8 +116,8 @@ stateDiagram-v2
 ## 4. Coding & AI Implementation Plan (Sprint 3)
 
 - **Permitted AI Tools:** [e.g., GitHub Copilot, ChatGPT, Claude]
-- **AI Prompting & Constraint Strategy:** Explain how you will constrain AI models to generate code (in Python or your chosen language) that adheres strictly to the protocol blueprint and FSM designed in Sprints 1 & 2.
-- **Implementation Risk Management:** Detail your plan to leverage past programming experience and manage time to ensure code completion on schedule.
+- **AI Prompting & Constraint Strategy:** I use specific prompts that reference the Sprint 1 message types, JSON fields, newline framing, and FSM. I also require the Sprint 2 `threading.Thread` and `threading.Lock` design, without adding new protocol messages. I review and test the code to make sure it follows these rules.
+- **Implementation Risk Management:** I divided the work into message handling, server game logic, and the client interface. I tested the parser first, then tested two players on localhost, including invalid moves, DNS errors, disconnects, and multiple turns. This leaves time to fix problems before moving the game into CML.
 
 ---
 
