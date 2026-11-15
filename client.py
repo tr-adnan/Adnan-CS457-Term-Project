@@ -5,6 +5,7 @@ import argparse
 import queue
 import socket
 import threading
+import sys
 
 from protocol import (
     MAX_MESSAGE_BYTES, SHIP_SIZES, ProtocolError, decode_frame,
@@ -243,9 +244,10 @@ def main():
 
     try:
         server_ip = socket.gethostbyname(args.hostname)
-    except socket.gaierror:
-        parser.exit(1, "[ERROR] Unable to resolve DNS hostname '{}'.\n"
-                    "Check your Cisco router DNS configuration or hostname spelling.\n".format(args.hostname))
+    except socket.gaierror as e:
+        print(f"[ERROR] Unable to resolve DNS hostname '{args.hostname}'.")
+        print("Please check your Cisco router DNS configuration ('ip dns server' / 'ip host') or verify domain spelling.")
+        sys.exit(1)
 
     try:
         alias = input("Enter your player name: ").strip() or "Player"
