@@ -1,0 +1,1270 @@
+CS 457 – Sprint 3: Intermediate Gameplay Execution Log
+Game: Two-Player Battleship
+Environment: Localhost (127.0.0.1), TCP Port 8080
+
+This log shows two clients connecting to the server, placing
+their ships, taking turns, and completing a full game.
+
+
+==================================================
+1. SERVER EXECUTION LOG
+==================================================
+PS C:\Users\adnan\Desktop\CS457\Term_Project\Adnan-CS457-Term-Project> python server.py -p 8080             
+[SERVER] Listening on 0.0.0.0:8080 (TCP)
+[SERVER] A joined as Player_1
+[SERVER] B joined as Player_2
+[SERVER] Both players connected. Ship placement started.
+[SERVER] Player_2 placed Carrier
+[SERVER] Player_2 placed Battleship
+[SERVER] Player_2 placed Submarine
+[SERVER] Player_2 placed Destroyer
+[SERVER] Player_1 placed Carrier
+[SERVER] Player_1 placed Battleship
+[SERVER] Player_1 placed Submarine
+[SERVER] Player_1 placed Destroyer
+[SERVER] Both fleets placed. Player_1's turn.
+[SERVER] Player_1 attacked (0, 0): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (9, 9): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (0, 1): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (8, 8): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (0, 2): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (7, 7): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (0, 3): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (6, 6): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (0, 4): SUNK
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (0, 0): HIT
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (1, 0): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (0, 2): HIT
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (1, 1): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (0, 4): HIT
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (1, 2): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (0, 6): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (1, 3): SUNK
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (0, 8): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (2, 0): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (5, 5): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (2, 1): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (4, 4): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (2, 2): SUNK
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (9, 0): MISS
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (3, 0): HIT
+[SERVER] Next turn: Player_2
+[SERVER] Player_2 attacked (3, 0): HIT
+[SERVER] Next turn: Player_1
+[SERVER] Player_1 attacked (3, 1): SUNK
+[SERVER] GAME_OVER: Player_1 (ALL_SHIPS_SUNK) | Waiting for new players.
+
+
+==================================================
+2. CLIENT 1 – PLAYER_1 (A)
+==================================================
+PS C:\Users\adnan\Desktop\CS457\Term_Project\Adnan-CS457-Term-Project> python client.py -i 127.0.0.1 -p 8080
+Enter your player name: A
+Connected to 127.0.0.1 (127.0.0.1) on port 8080.
+Connected as Player_1. Waiting for Player 2 to connect.
+
+GAME START! You are Player_1 vs. B.
+Place four ships on the 10x10 grid. Coordinates are 0-9.
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 . . . . . . . . . .
+  1 . . . . . . . . . .
+  2 . . . . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Place Carrier (size 5) - row col H/V: 0 0 
+Enter three values, e.g. 0 0 H
+Place Carrier (size 5) - row col H/V: 0 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 . . . . . . . . . .
+  2 . . . . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Carrier placed successfully.
+Place Battleship (size 4) - row col H/V: 1 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 . . . . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Battleship placed successfully.
+Place Submarine (size 3) - row col H/V: 2 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Submarine placed successfully.
+Place Destroyer (size 2) - row col H/V: 3 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Destroyer placed successfully.
+All four ships placed. Waiting for opponent...
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 0 0 
+
+Your attack at (0, 0): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Waiting for Player_2...
+
+Opponent's attack at (9, 9): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 0 1 
+
+Your attack at (0, 1): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Waiting for Player_2...
+
+Opponent's attack at (8, 8): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 0 1
+[ERROR] REPEATED_ATTACK: You already attacked this coordinate.
+Your turn - attack row col (e.g. 2 4): 0 2
+
+Your attack at (0, 2): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Waiting for Player_2...
+
+Opponent's attack at (7, 7): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 0 3
+
+Your attack at (0, 3): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X X ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Waiting for Player_2...
+
+Opponent's attack at (6, 6): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X X ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 0 4
+
+Your attack at (0, 4): SUNK (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 1 - Opponent 0
+Waiting for Player_2...
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Your turn!
+Your turn - attack row col (e.g. 2 4): 1 0 
+
+Your attack at (1, 0): HIT (Battleship)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 X ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 1 - Opponent 0
+Waiting for Player_2...
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Your turn!
+Your turn - attack row col (e.g. 2 4): 1 3 
+
+Your attack at (1, 3): SUNK (Battleship)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S X S X . o . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 - - - - ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 2 - Opponent 0
+Waiting for Player_2...
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Your turn!
+Your turn - attack row col (e.g. 2 4): 2 0 
+
+Your attack at (2, 0): HIT (Submarine)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S X S X . o . o .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 - - - - ? ? ? ? ? ?
+  2 X ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 2 - Opponent 0
+Waiting for Player_2...
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Your turn!
+Your turn - attack row col (e.g. 2 4): 2 2
+
+Your attack at (2, 2): SUNK (Submarine)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S X S X . o . o .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . o . . . . .
+  5 . . . . . o . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 . . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 - - - - ? ? ? ? ? ?
+  2 - - - ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 3 - Opponent 0
+Waiting for Player_2...
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Your turn!
+Your turn - attack row col (e.g. 2 4): 3 0 
+
+Your attack at (3, 0): HIT (Destroyer)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S X S X . o . o .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . o . . . . .
+  5 . . . . . o . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 o . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 - - - - ? ? ? ? ? ?
+  2 - - - ? ? ? ? ? ? ?
+  3 X ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 3 - Opponent 0
+Waiting for Player_2...
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Your turn!
+Your turn - attack row col (e.g. 2 4): 3 1
+
+Your attack at (3, 1): SUNK (Destroyer)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S X S X . o . o .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 X S . . . . . . . .
+  4 . . . . o . . . . .
+  5 . . . . . o . . . .
+  6 . . . . . . o . . .
+  7 . . . . . . . o . .
+  8 . . . . . . . . o .
+  9 o . . . . . . . . o
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - ? ? ? ? ?
+  1 - - - - ? ? ? ? ? ?
+  2 - - - ? ? ? ? ? ? ?
+  3 - - ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 4 - Opponent 0
+All ships sunk. Waiting for final result...
+
+GAME OVER! You win!
+Winner: Player_1 | Reason: ALL_SHIPS_SUNK
+
+
+==================================================
+3. CLIENT 2 – PLAYER_2 (B)
+==================================================
+PS C:\Users\adnan\Desktop\CS457\Term_Project\Adnan-CS457-Term-Project> python client.py -i localhost -p 8080
+Enter your player name: B
+Connected to localhost (127.0.0.1) on port 8080.
+
+GAME START! You are Player_2 vs. A.
+Place four ships on the 10x10 grid. Coordinates are 0-9.
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 . . . . . . . . . .
+  1 . . . . . . . . . .
+  2 . . . . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Place Carrier (size 5) - row col H/V: 0 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 . . . . . . . . . .
+  2 . . . . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Carrier placed successfully.
+Place Battleship (size 4) - row col H/V: 1 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 . . . . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Battleship placed successfully.
+Place Submarine (size 3) - row col H/V: 2 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 . . . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Submarine placed successfully.
+Place Destroyer (size 2) - row col H/V: 3 0 H
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+Score: You 0 - Opponent 0
+Destroyer placed successfully.
+All four ships placed. Waiting for opponent...
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 S S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Waiting for Player_1...
+
+Opponent's attack at (0, 0): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? ?
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 9 9 
+
+Your attack at (9, 9): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X S S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Waiting for Player_1...
+
+Opponent's attack at (0, 1): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? ? ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 8 8 
+
+Your attack at (8, 8): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X S S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Waiting for Player_1...
+
+Opponent's attack at (0, 2): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? ? ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 7 7 
+
+Your attack at (7, 7): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X S S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Waiting for Player_1...
+
+Opponent's attack at (0, 3): HIT (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X X S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? ? ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Your turn!
+Your turn - attack row col (e.g. 2 4): 6 6 
+
+Your attack at (6, 6): MISS
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 X X X X S . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 0
+Waiting for Player_1...
+
+Opponent's attack at (0, 4): SUNK (Carrier)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 S S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 ? ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 1
+Your turn!
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Opponent's attack at (1, 0): HIT (Battleship)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 X S S S . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? ? ? ? ? ? ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 1
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Opponent's attack at (1, 3): SUNK (Battleship)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 - - - - . . . . . .
+  2 S S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? X ? X ? o ? ? ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 2
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Opponent's attack at (2, 0): HIT (Submarine)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 - - - - . . . . . .
+  2 X S S . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? X ? X ? o ? o ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? ? ? ? ? ? ?
+  5 ? ? ? ? ? ? ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 2
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Opponent's attack at (2, 2): SUNK (Submarine)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 - - - - . . . . . .
+  2 - - - . . . . . . .
+  3 S S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? X ? X ? o ? o ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? o ? ? ? ? ?
+  5 ? ? ? ? ? o ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 ? ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 3
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Opponent's attack at (3, 0): HIT (Destroyer)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 - - - - . . . . . .
+  2 - - - . . . . . . .
+  3 X S . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? X ? X ? o ? o ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 ? ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? o ? ? ? ? ?
+  5 ? ? ? ? ? o ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 o ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 3
+
+[... Intermediate turns and repeated board updates omitted for brevity ...]
+
+Opponent's attack at (3, 1): SUNK (Destroyer)
+
+YOUR BOARD  (S=ship, X=hit, -=sunk, o=miss, .=empty)
+    0 1 2 3 4 5 6 7 8 9
+  0 - - - - - . . . . .
+  1 - - - - . . . . . .
+  2 - - - . . . . . . .
+  3 - - . . . . . . . .
+  4 . . . . . . . . . .
+  5 . . . . . . . . . .
+  6 . . . . . . . . . .
+  7 . . . . . . . . . .
+  8 . . . . . . . . . .
+  9 . . . . . . . . . .
+
+OPPONENT BOARD  (?=unknown, X=hit, -=sunk, o=miss)
+    0 1 2 3 4 5 6 7 8 9
+  0 X ? X ? X ? o ? o ?
+  1 ? ? ? ? ? ? ? ? ? ?
+  2 ? ? ? ? ? ? ? ? ? ?
+  3 X ? ? ? ? ? ? ? ? ?
+  4 ? ? ? ? o ? ? ? ? ?
+  5 ? ? ? ? ? o ? ? ? ?
+  6 ? ? ? ? ? ? o ? ? ?
+  7 ? ? ? ? ? ? ? o ? ?
+  8 ? ? ? ? ? ? ? ? o ?
+  9 o ? ? ? ? ? ? ? ? o
+Score: You 0 - Opponent 4
+All ships sunk. Waiting for final result...
+
+GAME OVER! You lose.
+Winner: Player_1 | Reason: ALL_SHIPS_SUNK
